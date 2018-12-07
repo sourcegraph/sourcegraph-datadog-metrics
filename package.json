@@ -2,7 +2,7 @@
   "name": "datadog-metrics",
   "title": "WIP: Datadog metrics",
   "description": "Allows jumps to the Datadog page for a metrics/instrumentation call in the code files",
-  "publisher": "Vanesa",
+  "publisher": "vanesa",
   "activationEvents": [
     "*"
   ],
