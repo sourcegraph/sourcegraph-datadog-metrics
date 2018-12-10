@@ -1,6 +1,6 @@
 import * as sourcegraph from "sourcegraph";
 
-const STATSD_PATTERN = /statsd\.\(['"]([^'"]+)['"]/gi;
+const STATSD_PATTERN = /statsd\.[a-z\('"]+([^'"])+['"]\)/gi;
 
 export function activate(): void {
     sourcegraph.workspace.onDidOpenTextDocument.subscribe(textDocument => {
@@ -29,7 +29,7 @@ export function activate(): void {
                             range: new sourcegraph.Range(i, 0, i, 0),
                             isWholeLine: true,
                             after: {
-                                backgroundColor: "purple",
+                                backgroundColor: "#774b9e",
                                 color: "rgba(255, 255, 255, 0.8)",
                                 contentText: "View metric (Datadog) » ",
                                 linkURL: buildUrl(m[1]).toString()
