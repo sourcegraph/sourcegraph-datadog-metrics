@@ -1,6 +1,6 @@
 import * as sourcegraph from "sourcegraph";
 
-const STATSD_PATTERN = /statsd\.[a-z\('"]+([^'"])+['"]\)/gi;
+const STATSD_PATTERN = /statsd\.[a-z\('"]+([^'"])+['"]/gi;
 
 export function activate(): void {
     sourcegraph.workspace.onDidOpenTextDocument.subscribe(textDocument => {
