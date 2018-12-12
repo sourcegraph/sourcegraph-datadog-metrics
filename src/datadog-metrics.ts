@@ -3,18 +3,6 @@ import * as sourcegraph from "sourcegraph";
 const STATSD_PATTERN = /statsd\.[^\'\"]+\([\'\"]([^\'\"]+)[\'\"]\)*/gi;
 
 export function activate(): void {
-    sourcegraph.workspace.onDidOpenTextDocument.subscribe(textDocument => {
-        decorateEditors(
-            sourcegraph.app.activeWindow!.visibleViewComponents.filter(
-                viewComp => viewComp.document.uri === textDocument.uri
-            )
-        );
-    });
-
-    sourcegraph.configuration.subscribe(() => {
-        decorateEditors(sourcegraph.app.activeWindow!.visibleViewComponents);
-    });
-
     function decorateEditors(editorsToUpdate: sourcegraph.CodeEditor[]): void {
         for (const editor of editorsToUpdate) {
             const decorations: sourcegraph.TextDocumentDecoration[] = [];
@@ -39,10 +27,18 @@ export function activate(): void {
                 } while (m);
                 STATSD_PATTERN.lastIndex = 0; // reset
             }
-
-            editor.setDecorations(null, decorations);
+            setTimeout(() => editor.setDecorations(null, decorations), 200);
         }
     }
+    sourcegraph.workspace.onDidOpenTextDocument.subscribe(textDocument => {
+        decorateEditors(sourcegraph.app.activeWindow!.visibleViewComponents);
+    });
+
+    sourcegraph.configuration.subscribe(() => {
+        if (sourcegraph.app.activeWindow) {
+            decorateEditors(sourcegraph.app.activeWindow.visibleViewComponents);
+        }
+    });
 }
 
 function buildUrl(metricName: string): URL {
