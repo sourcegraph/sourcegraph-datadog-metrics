@@ -35,7 +35,6 @@ export function activate(): void {
                                 linkURL: buildUrl(m[1]).toString()
                             }
                         });
-                        console.log(buildUrl(m[1]).toString());
                     }
                 } while (m);
                 STATSD_PATTERN.lastIndex = 0; // reset
