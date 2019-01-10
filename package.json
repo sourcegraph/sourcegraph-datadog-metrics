@@ -1,6 +1,6 @@
 {
   "name": "datadog-metrics",
-  "title": "WIP: Datadog metrics",
+  "title": "Datadog metrics",
   "description": "Allows jumps to the Datadog page for a metrics/instrumentation call in the code files",
   "publisher": "sourcegraph",
   "activationEvents": [
@@ -37,7 +37,7 @@
     "@sourcegraph/tsconfig": "^3.0.0",
     "@sourcegraph/tslint-config": "^12.1.0",
     "parcel-bundler": "^1.10.3",
-    "sourcegraph": "^19.4.0",
+    "sourcegraph": "^20.0.0",
     "tslint": "^5.11.0",
     "typescript": "^3.2.1"
   }
