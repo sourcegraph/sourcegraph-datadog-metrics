@@ -10,7 +10,7 @@ A [Sourcegraph extension](https://docs.sourcegraph.com/extensions) that allows j
 
 Works on [Sourcegraph.com](https://sourcegraph.com), [self-hosted Sourcegraph instances](https://docs.sourcegraph.com/#quickstart), and on code hosts (via the [Sourcegraph browser extension](https://docs.sourcegraph.com/integration/browser_extension)).
 
-- **Jump to graph on Datadog page ** for standard metric/instrumentation calls
+- **Jump to graph on Datadog page** for standard metric/instrumentation calls
 
 ![Datadog extension screenshot](https://d2ddoduugvun08.cloudfront.net/items/3m1V0510370x0Q1e2O2x/Image%202019-01-07%20at%203.07.23%20PM.png "Datadog extension example")
 
