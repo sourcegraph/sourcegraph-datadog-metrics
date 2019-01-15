@@ -1,12 +1,19 @@
 {
   "name": "datadog-metrics",
-  "title": "Datadog metrics",
-  "description": "Allows jumps to the Datadog page for a metrics/instrumentation call in the code files",
+  "description": "Jump to Datadog metrics from statsd calls in code",
   "publisher": "sourcegraph",
   "repository": {
     "type": "git",
     "url": "https://github.com/sourcegraph/sourcegraph-datadog-metrics"
   },
+  "categories": [
+    "External services"
+  ],
+  "tags": [
+    "datadog",
+    "metrics",
+    "statsd"
+  ],
   "activationEvents": [
     "*"
   ],
