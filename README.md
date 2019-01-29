@@ -16,7 +16,7 @@ Works on [Sourcegraph.com](https://sourcegraph.com), [self-hosted Sourcegraph in
 
 ## Usage
 
-**Note:** Using this extension on private code in the Sourcegraph browser extension requires a self-hosted Sourcegraph instance (because it needs access to the contents of the current file).
+**Note:** Using this extension on private code in the [Sourcegraph browser extension](https://docs.sourcegraph.com/integration/browser_extension) requires a [self-hosted Sourcegraph instance](https://docs.sourcegraph.com/#quickstart) (because it needs access to the contents of the current file).
 
 1. Enable the `sourcegraph-datadog-metrics` extension:
    - On Sourcegraph.com, visit [https://sourcegraph.com/extensions/sourcegraph/datadog-metrics](https://sourcegraph.com/extensions/sourcegraph/datadog-metrics) to enable it.
