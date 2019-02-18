@@ -1,3 +1,3 @@
 {
-  "extends": ["github>sourcegraph/renovate"]
+  "extends": ["github>sourcegraph/renovate-config"]
 }
