@@ -28,18 +28,22 @@ export function activate(context: sourcegraph.ExtensionContext): void {
                 STATSD_PATTERN.lastIndex = 0 // reset
             }
 
-            const activeEditor = from(sourcegraph.app.activeWindowChanges).pipe(
-                filter((window): window is sourcegraph.Window => window !== undefined),
-                switchMap(window => window.activeViewComponentChanges),
-                filter((editor): editor is sourcegraph.CodeEditor => editor !== undefined)
-            )
-            const decorationType = sourcegraph.app.createDecorationType()
+            if (sourcegraph.app.activeWindowChanges) {
+                const activeEditor = from(sourcegraph.app.activeWindowChanges).pipe(
+                    filter((window): window is sourcegraph.Window => window !== undefined),
+                    switchMap(window => window.activeViewComponentChanges),
+                    filter((editor): editor is sourcegraph.CodeEditor => editor !== undefined)
+                )
 
-            context.subscriptions.add(
-                activeEditor.subscribe(editor => {
-                    editor.setDecorations(decorationType, decorations)
-                })
-            )
+                // When the configuration or current file changes, publish new decorations.
+                const decorationType = sourcegraph.app.createDecorationType()
+
+                context.subscriptions.add(
+                    activeEditor.subscribe(editor => {
+                        editor.setDecorations(decorationType, decorations)
+                    })
+                )
+            }
         }
     }
     sourcegraph.workspace.onDidOpenTextDocument.subscribe(() =>
