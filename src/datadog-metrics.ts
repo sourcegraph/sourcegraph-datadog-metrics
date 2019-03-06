@@ -3,10 +3,10 @@ import { filter, switchMap } from 'rxjs/operators'
 import * as sourcegraph from 'sourcegraph'
 
 const STATSD_PATTERN = /statsd\.[^\'\"]+\([\'\"]([^\'\"]+)[\'\"]\)*/gi
+const DECORATION_TYPE = sourcegraph.app.createDecorationType()
 
 function decorateEditor(editor: sourcegraph.CodeEditor): void {
     const decorations: sourcegraph.TextDocumentDecoration[] = []
-    const decorationType = sourcegraph.app.createDecorationType()
     for (const [i, line] of editor.document.text!.split('\n').entries()) {
         let m: RegExpExecArray | null
         do {
@@ -26,17 +26,16 @@ function decorateEditor(editor: sourcegraph.CodeEditor): void {
         } while (m)
         STATSD_PATTERN.lastIndex = 0 // reset
     }
-    editor.setDecorations(decorationType, decorations)
+    editor.setDecorations(DECORATION_TYPE, decorations)
 }
 
 export function activate(context: sourcegraph.ExtensionContext): void {
-    const activeEditor = from(sourcegraph.app.activeWindowChanges).pipe(
-        filter((window): window is sourcegraph.Window => window !== undefined),
-        switchMap(window => window.activeViewComponentChanges),
-        filter((editor): editor is sourcegraph.CodeEditor => editor !== undefined)
-    )
-
     if (sourcegraph.app.activeWindowChanges) {
+        const activeEditor = from(sourcegraph.app.activeWindowChanges).pipe(
+            filter((window): window is sourcegraph.Window => window !== undefined),
+            switchMap(window => window.activeViewComponentChanges),
+            filter((editor): editor is sourcegraph.CodeEditor => editor !== undefined)
+        )
         // When the active editor changes, publish new decorations.
         context.subscriptions.add(activeEditor.subscribe(decorateEditor))
     }
