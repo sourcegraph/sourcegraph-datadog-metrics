@@ -26,7 +26,7 @@ export function activate(): void {
                 STATSD_PATTERN.lastIndex = 0 // reset
             }
             const decorationType = sourcegraph.app.createDecorationType()
-            editor.setDecorations(decorationType, decorations)
+            setTimeout(() => editor.setDecorations(decorationType, decorations), 200)
         }
     }
     sourcegraph.workspace.onDidOpenTextDocument.subscribe(() =>
@@ -34,7 +34,9 @@ export function activate(): void {
     )
 
     sourcegraph.configuration.subscribe(() => {
-        decorateEditors(sourcegraph.app.activeWindow!.visibleViewComponents)
+        if (sourcegraph.app.activeWindow) {
+            decorateEditors(sourcegraph.app.activeWindow.visibleViewComponents)
+        }
     })
 }
 
