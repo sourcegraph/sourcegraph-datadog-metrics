@@ -1,3 +1,4 @@
+import { combineLatest, from, Observable } from 'rxjs'
 import * as sourcegraph from 'sourcegraph'
 
 const STATSD_PATTERN = /statsd\.[^\'\"]+\([\'\"]([^\'\"]+)[\'\"]\)*/gi
@@ -6,7 +7,7 @@ export function activate(): void {
     function decorateEditors(editorsToUpdate: sourcegraph.CodeEditor[]): void {
         for (const editor of editorsToUpdate) {
             const decorations: sourcegraph.TextDocumentDecoration[] = []
-            for (const [i, line] of editor.document.text.split('\n').entries()) {
+            for (const [i, line] of editor.document.text!.split('\n').entries()) {
                 let m: RegExpExecArray | null
                 do {
                     m = STATSD_PATTERN.exec(line)
@@ -33,9 +34,12 @@ export function activate(): void {
         decorateEditors(sourcegraph.app.activeWindow!.visibleViewComponents)
     )
 
-    sourcegraph.configuration.subscribe(() => {
-        if (sourcegraph.app.activeWindow) {
-            decorateEditors(sourcegraph.app.activeWindow.visibleViewComponents)
+    combineLatest(
+        from(sourcegraph.app.activeWindowChanges),
+        new Observable(subscriber => sourcegraph.configuration.subscribe(() => subscriber.next()))
+    ).subscribe(([activeWindow]) => {
+        if (activeWindow) {
+            decorateEditors(sourcegraph.app.activeWindow!.visibleViewComponents)
         }
     })
 }
