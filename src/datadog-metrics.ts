@@ -1,9 +1,10 @@
-import { combineLatest, from, Observable } from 'rxjs'
+import { from } from 'rxjs'
+import { filter, switchMap } from 'rxjs/operators'
 import * as sourcegraph from 'sourcegraph'
 
 const STATSD_PATTERN = /statsd\.[^\'\"]+\([\'\"]([^\'\"]+)[\'\"]\)*/gi
 
-export function activate(): void {
+export function activate(context: sourcegraph.ExtensionContext): void {
     function decorateEditors(editorsToUpdate: sourcegraph.CodeEditor[]): void {
         for (const editor of editorsToUpdate) {
             const decorations: sourcegraph.TextDocumentDecoration[] = []
@@ -26,22 +27,24 @@ export function activate(): void {
                 } while (m)
                 STATSD_PATTERN.lastIndex = 0 // reset
             }
+
+            const activeEditor = from(sourcegraph.app.activeWindowChanges).pipe(
+                filter((window): window is sourcegraph.Window => window !== undefined),
+                switchMap(window => window.activeViewComponentChanges),
+                filter((editor): editor is sourcegraph.CodeEditor => editor !== undefined)
+            )
             const decorationType = sourcegraph.app.createDecorationType()
-            setTimeout(() => editor.setDecorations(decorationType, decorations), 200)
+
+            context.subscriptions.add(
+                activeEditor.subscribe(editor => {
+                    editor.setDecorations(decorationType, decorations)
+                })
+            )
         }
     }
     sourcegraph.workspace.onDidOpenTextDocument.subscribe(() =>
         decorateEditors(sourcegraph.app.activeWindow!.visibleViewComponents)
     )
-
-    combineLatest(
-        from(sourcegraph.app.activeWindowChanges),
-        new Observable(subscriber => sourcegraph.configuration.subscribe(() => subscriber.next()))
-    ).subscribe(([activeWindow]) => {
-        if (activeWindow) {
-            decorateEditors(sourcegraph.app.activeWindow!.visibleViewComponents)
-        }
-    })
 }
 
 function buildUrl(metricName: string): URL {
