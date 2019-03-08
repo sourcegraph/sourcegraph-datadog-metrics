@@ -8,22 +8,19 @@ const DECORATION_TYPE = sourcegraph.app.createDecorationType()
 function decorateEditor(editor: sourcegraph.CodeEditor): void {
     const decorations: sourcegraph.TextDocumentDecoration[] = []
     for (const [i, line] of editor.document.text!.split('\n').entries()) {
-        let m: RegExpExecArray | null
-        do {
-            m = STATSD_PATTERN.exec(line)
-            if (m) {
-                decorations.push({
-                    range: new sourcegraph.Range(i, 0, i, 0),
-                    isWholeLine: true,
-                    after: {
-                        backgroundColor: '#774b9e',
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        contentText: ' View metric (Datadog) » ',
-                        linkURL: buildUrl(m[1]).toString(),
-                    },
-                })
-            }
-        } while (m)
+        const match = line.match(STATSD_PATTERN)
+        if (match) {
+            decorations.push({
+                range: new sourcegraph.Range(i, 0, i, 0),
+                isWholeLine: true,
+                after: {
+                    backgroundColor: '#774b9e',
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    contentText: ' View metric (Datadog) » ',
+                    linkURL: buildUrl(match[1]).toString(),
+                },
+            })
+        }
         STATSD_PATTERN.lastIndex = 0 // reset
     }
     editor.setDecorations(DECORATION_TYPE, decorations)
