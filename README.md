@@ -14,6 +14,8 @@ Works on [Sourcegraph.com](https://sourcegraph.com), [self-hosted Sourcegraph in
 
 ![Datadog extension screenshot](https://d2ddoduugvun08.cloudfront.net/items/3p1H2N301P2W030c0l2m/Image%202019-06-06%20at%2011.49.51%20AM.png "Datadog extension example")
 
+![Datadog metric](https://d2ddoduugvun08.cloudfront.net/items/260v052e0i470D2S1I2K/Image%202019-06-06%20at%2011.51.06%20AM.png "Datadog metric example")
+
 ## Usage
 
 1. Enable the `sourcegraph-datadog-metrics` extension:
