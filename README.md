@@ -12,7 +12,7 @@ Works on [Sourcegraph.com](https://sourcegraph.com), [self-hosted Sourcegraph in
 
 - **Jump to graph on Datadog page** for standard metric/instrumentation calls
 
-![Datadog extension screenshot](https://d2ddoduugvun08.cloudfront.net/items/3m1V0510370x0Q1e2O2x/Image%202019-01-07%20at%203.07.23%20PM.png "Datadog extension example")
+![Datadog extension screenshot](https://d2ddoduugvun08.cloudfront.net/items/452G2i2Y342k100x3I26/Image%202019-06-06%20at%2011.48.27%20AM.png "Datadog extension example")
 
 ## Usage
 
