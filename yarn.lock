@@ -4976,10 +4976,10 @@ source-map@~0.7.2:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
-sourcegraph@^23.0.0:
-  version "23.3.0"
-  resolved "https://registry.yarnpkg.com/sourcegraph/-/sourcegraph-23.3.0.tgz#a3d2188302ae710df4fe8d9136b02f41922c47f4"
-  integrity sha512-pEROnDHHTIWkkdYI3fWOAGUm3j5O40j26MGiK0T48LB0FnAq+P/fjIYWjY53q4WOyLxthL5vGAAA2gNIcR4/vg==
+sourcegraph@^25.6.0:
+  version "25.6.0"
+  resolved "https://registry.yarnpkg.com/sourcegraph/-/sourcegraph-25.6.0.tgz#fc23822a8e207e25ff9bfc217dad4a14bfbd1e84"
+  integrity sha512-BKe/hugALfgMyM38ecWpeFLtXvVklq++aUpGlm4Y3fY8/ufbUE/FAaYchF9qkidli8Usef5xnDRCKbAfsPRpWA==
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
