@@ -49,7 +49,7 @@
     "@sourcegraph/tslint-config": "^13.4.0",
     "parcel-bundler": "^1.11.0",
     "rxjs": "^6.4.0",
-    "sourcegraph": "^25.6.0",
+    "sourcegraph": "^25.7.0",
     "tslint": "^5.20.1",
     "typescript": "^3.3.3"
   },
