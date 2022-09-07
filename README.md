@@ -1,5 +1,14 @@
 # Datadog metrics Sourcegraph extension
 
+## ⚠️ Deprecation notice
+
+**Sourcegraph extensions have been deprecated with the September 2022 Sourcegraph
+release. [Learn more](https://docs.sourcegraph.com/extensions/deprecation).**
+
+The repo and the docs below are kept to support older Sourcegraph versions.
+
+## Description
+
 A [Sourcegraph extension](https://docs.sourcegraph.com/extensions) that allows jumps to the Datadog page for a metrics/instrumentation call in the code files.
 
 [**🗃️ Source code**](https://github.com/sourcegraph/sourcegraph-datadog-metrics)
