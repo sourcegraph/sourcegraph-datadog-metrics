@@ -1,5 +1,4 @@
-import { from } from 'rxjs'
-import { filter, switchMap } from 'rxjs/operators'
+import { filter, from, switchMap } from 'rxjs'
 import * as sourcegraph from 'sourcegraph'
 
 const STATSD_PATTERN = /statsd\.[^\'\"]+\([\'\"]([^\'\"]+)[\'\"]\)*/gi
